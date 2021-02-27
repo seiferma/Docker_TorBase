@@ -3,3 +3,5 @@ This image serves as base image for other images that would like to prohibit all
 
 In order to run this (and derived) images, you have to ensure that
 * the container is started with capabilities NET_ADMIN and NET_RAW
+
+The image is available via the [Github Container Registry](https://github.com/users/seiferma/packages/container/package/torbase).
