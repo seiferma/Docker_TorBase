@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Set DNS to localhost
-echo "nameserver 127.0.0.1:9053" > /etc/resolv.conf
+cat /etc/resolv.conf.tor > /etc/resolv.conf
 
 # Apply nft definitions
 nft -f /etc/nftables.conf
