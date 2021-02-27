@@ -19,8 +19,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build image
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+      - name: Test image
         run: |
-          docker build . --file Dockerfile --tag $IMAGE_NAME
           echo "Testing the image by checking the publicly visible IP. This takes less than two minutes."
           IP=$(curl -s http://checkip.amazonaws.com)
           IP2=$(docker run --rm --cap-add=NET_ADMIN --cap-add=NET_RAW $IMAGE_NAME torsocks wget -q -O - -T 60 http://checkip.amazonaws.com)
