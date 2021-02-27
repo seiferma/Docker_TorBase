@@ -14,5 +14,21 @@ fi
 # Run tor under user "tor"
 su-exec tor tor -f /etc/tor/torrc > /tmp/tor.log &
 
+# Wait for tor to be ready
+DELAY=2
+TRIES=30
+TIMEOUT=$(( $DELAY * $TRIES ))
+i=0
+while [ "$i" -le $TRIES ]; do
+	if grep -q 'Bootstrapped 100%' /tmp/tor.log; then
+		break
+	fi
+	if [ "$i" -ge "$TRIES" ]; then
+		echo "Tor got not ready within $TIMEOUT s, aborting."
+		exit 2
+	fi
+	sleep $DELAY
+done
+
 # Execute command
 exec "$@"

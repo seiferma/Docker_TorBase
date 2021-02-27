@@ -23,7 +23,7 @@ jobs:
           docker build . --file Dockerfile --tag $IMAGE_NAME
           echo "Testing the image by checking the publicly visible IP. This takes less than two minutes."
           IP=$(curl -s http://checkip.amazonaws.com)
-          IP2=$(docker run --rm --cap-add=NET_ADMIN --cap-add=NET_RAW $IMAGE_NAME /bin/sh -c "sleep 30 && torsocks wget -q -O - -T 60 http://checkip.amazonaws.com")
+          IP2=$(docker run --rm --cap-add=NET_ADMIN --cap-add=NET_RAW $IMAGE_NAME torsocks wget -q -O - -T 60 http://checkip.amazonaws.com
           echo "IP of host:      $IP"
           echo "IP of container: $IP2"
           [[ "$IP" != "$IP2" ]] || exit 1
