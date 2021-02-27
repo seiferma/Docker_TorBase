@@ -20,7 +20,7 @@ TRIES=30
 TIMEOUT=$(( $DELAY * $TRIES ))
 i=0
 while [ "$i" -le $TRIES ]; do
-	if grep -q 'Bootstrapped 100%' /tmp/tor.log; then
+	if grep -q 'Bootstrapped 100%' /tmp/tor.log &> /dev/null; then
 		break
 	fi
 	if [ "$i" -ge "$TRIES" ]; then
