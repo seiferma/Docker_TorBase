@@ -2,21 +2,18 @@ name: Docker
 
 on:
   push:
-    branches:
-      - '*'
-    tags:
-      - '*'
+    branches: '*'
+    tags: '*'
   pull_request:
-  schedule:
-  - cron: '20 3 * * 6'
 
 env:
-  IMAGE_NAME: torbase
+  IMAGE_NAME: tor-base
 
 jobs:
+
   test:
-  
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
 
@@ -44,17 +41,20 @@ jobs:
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
       - name: Log into registry
-        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u seiferma+github --password-stdin
 
       - name: Push image
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+          IMAGE_ID=quay.io/seiferma/$IMAGE_NAME
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
 
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
 
           # Use Docker `latest` tag convention
           [ "$VERSION" == "main" ] && VERSION=latest
