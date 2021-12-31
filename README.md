@@ -3,7 +3,7 @@
 [![](https://img.shields.io/github/issues/seiferma/Docker_TorBase.svg)](https://github.com/seiferma/Docker_TorBase/issues)
 [![](https://img.shields.io/github/license/seiferma/Docker_TorBase.svg)](https://github.com/seiferma/Docker_TorBase/blob/main/LICENSE)
 
-This image serves as base image for other images that would like to prohibit all traffic except for TOR. Thereto, this image blocks all traffic via filter rules. The DNS server is bound to the TOR DNS resolver, so name resolution works. To make an application to use TOR, you have to configure the proxy in the application or use tools like [torsocks](https://linux.die.net/man/1/torsocks), which is shipped with this image.
+This image serves as base image for other images that would like to prohibit all traffic except for TOR. Thereto, this image blocks all traffic via filter rules. The DNS server is bound to the TOR DNS resolver, so name resolution works. The environment variables `http_proxy` and `https_proxy` are set, so all applications evaluating these variables use TOR automatically. To make other applications use TOR, you have to configure the http proxies (localhost:8118) or the socks proxy (localhost:9050) manually in the application or use tools like [torsocks](https://linux.die.net/man/1/torsocks), which is shipped with this image.
 
 In order to run this (and derived) images, you have to ensure that
 * the container is started with capabilities NET_ADMIN and NET_RAW
