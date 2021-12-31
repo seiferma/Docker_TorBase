@@ -5,6 +5,7 @@ on:
     branches: '*'
     tags: '*'
   pull_request:
+  repository_dispatch:
 
 env:
   IMAGE_NAME: tor-base
