@@ -4,6 +4,7 @@
 cat /etc/resolv.conf.tor > /etc/resolv.conf
 
 # Apply nft definitions
+echo 'define uid = '$(id -u tor) | cat - /etc/nftables.conf.template > /tmp/nftables.conf && mv /tmp/nftables.conf /etc/nftables.conf
 nft -f /etc/nftables.conf
 if [ $? -ne 0 ]; then
     echo "ERROR: Could not apply nftables definitions."
@@ -11,8 +12,21 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# unset http proxy variables
+http_proxy_old=$http_proxy
+https_proxy_old=$http_proxy_old
+http_proxy=
+https_proxy=
+
 # Run tor under user "tor"
 su-exec tor tor -f /etc/tor/torrc > /tmp/tor.log &
+
+# Run privoxy under user "privoxy"
+su-exec privoxy privoxy --no-daemon /etc/privoxy/config &> /tmp/privoxy.log &
+
+# restore http proxy variables
+export http_proxy=$http_proxy_old
+export https_proxy=$https_proxy_old
 
 # Wait for tor to be ready
 DELAY=2

@@ -1,5 +1,6 @@
-# Verify tor uid with id -u tor
-define uid = 100
+# missing entry:
+#   define uid = xxx
+# find uid of tor with "id -u tor"
 
 table ip filter {
         chain INPUT {
