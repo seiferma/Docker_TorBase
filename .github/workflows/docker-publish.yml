@@ -6,6 +6,8 @@ on:
     tags: '*'
   pull_request:
   repository_dispatch:
+    types: [build]
+  workflow_dispatch:
 
 env:
   IMAGE_NAME: tor-base
