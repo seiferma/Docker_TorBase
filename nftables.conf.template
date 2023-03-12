@@ -1,6 +1,6 @@
 # missing entry:
 #   define uid = xxx
-# find uid of tor with "id -u tor"
+# find uid of tor-dckr with "id -u tor-dckr"
 
 table ip filter {
         chain INPUT {
