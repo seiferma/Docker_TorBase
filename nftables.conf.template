@@ -6,6 +6,8 @@ table ip filter {
         chain INPUT {
                 type filter hook input priority 0; policy drop;
                 ct state established accept
+                tcp dport 9050 accept
+                udp dport 9053 accept
                 iifname "lo" accept
         }
 
@@ -18,6 +20,8 @@ table ip filter {
                 ct state established accept
                 oifname t* meta l4proto tcp skuid $uid ct state new accept
                 oifname e* meta l4proto tcp skuid $uid ct state new accept
+                oifname t* meta l4proto udp skuid $uid th sport 9053 accept
+                oifname e* meta l4proto udp skuid $uid th sport 9053 accept
                 oifname "lo" accept
         }
 }

@@ -1,5 +1,5 @@
-SOCKSPort 9050
-DNSPort 9053
+SOCKSPort 0.0.0.0:9050
+DNSPort 0.0.0.0:9053
 
 SOCKSPolicy accept 127.0.0.0/8
 SOCKSPolicy accept 10.0.0.0/8
