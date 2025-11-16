@@ -73,6 +73,7 @@ while [ "$i" -le $TRIES ]; do
 	fi
 	sleep $DELAY
 done
+echo "Tor ist ready."
 
 # Execute command
 exec "$@"

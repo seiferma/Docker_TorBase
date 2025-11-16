@@ -1,5 +1,5 @@
 # Docker Base Image for Using Tor
-[![](https://github.com/seiferma/Docker_TorBase/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/seiferma/Docker_TorBase/actions?query=branch%3Amain+)
+[![](https://github.com/seiferma/Docker_TorBase/actions/workflows/docker-deploy.yml/badge.svg?branch=main)](https://github.com/seiferma/Docker_TorBase/actions?query=branch%3Amain+)
 [![](https://img.shields.io/github/issues/seiferma/Docker_TorBase.svg)](https://github.com/seiferma/Docker_TorBase/issues)
 [![](https://img.shields.io/github/license/seiferma/Docker_TorBase.svg)](https://github.com/seiferma/Docker_TorBase/blob/main/LICENSE)
 
