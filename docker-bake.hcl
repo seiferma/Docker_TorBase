@@ -1,6 +1,6 @@
 variable "TOR_VERSION" {
   # renovate: datasource=repology depName=alpine_3_22/tor versioning=loose
-  default = "0.4.8.20-r0"
+  default = "0.4.8.21-r0"
 }
 
 variable "TORSOCKS_VERSION" {
