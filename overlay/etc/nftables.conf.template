@@ -6,8 +6,10 @@ table ip filter {
         chain INPUT {
                 type filter hook input priority 0; policy drop;
                 ct state established accept
+                tcp dport 8118 accept
                 tcp dport 9050 accept
                 udp dport 9053 accept
+                udp dport 53 accept
                 iifname "lo" accept
         }
 
